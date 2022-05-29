@@ -8,7 +8,6 @@ public class MonsterGenerator : MonoBehaviour
     public float currentSpeed;
     public float speedMultipier;
 
-    // Start is called before the first frame update
     void Awake()
     {
         currentSpeed = MinSpeed;
@@ -27,7 +26,6 @@ public class MonsterGenerator : MonoBehaviour
         MonsterIns.GetComponent<MonsterScript>().monsterGenerator = this;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(currentSpeed < MaxSpeed)

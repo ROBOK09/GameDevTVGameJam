@@ -5,13 +5,9 @@ public class MenuScript : MonoBehaviour
 {
     public static bool GameisPaused = false;
     public GameObject pauseMenuUI;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    [SerializeField] PlayerScript player;
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape)|| Input.GetKeyDown(KeyCode.P))
@@ -27,17 +23,17 @@ public class MenuScript : MonoBehaviour
         }
     }
 
-    void Resume()
+    public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        player.StopOrResumeTime(false);
         GameisPaused = false;
     }
 
     void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        player.StopOrResumeTime(true);
         GameisPaused = true;
     }
 
@@ -47,7 +43,7 @@ public class MenuScript : MonoBehaviour
     }
     public void QuitToMainMenu()
     {
-        //SceneManager.LoadScene();
+        SceneManager.LoadScene(0);
     }
     public void QuitGame()
     {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using TMPro;
 
 public class PlayerScript : MonoBehaviour
@@ -11,15 +12,41 @@ public class PlayerScript : MonoBehaviour
     Rigidbody2D RB;
     public TMP_Text ScoreText;
     public GameObject gameOverPanel;
+    [SerializeField] float timeToIncreaseGameSpeed = 1f;
+    [SerializeField] float gameSpeedIncreaseMultiplier = 1f;
+    private float currentTimeScale = 1f;
+    private float initialTimeTime;
 
     private void Awake()
     {
+        initialTimeTime = Time.time;
         RB = GetComponent<Rigidbody2D>();
         score = 0;
         Time.timeScale = 1;
+        StartCoroutine(IncreaseGameSpeedOverTime());
     }
 
-    // Update is called once per frame
+    private IEnumerator IncreaseGameSpeedOverTime()
+    {
+        Time.timeScale = gameSpeedIncreaseMultiplier;
+        yield return new WaitForSeconds(timeToIncreaseGameSpeed);
+    }
+
+    public void StopOrResumeTime(bool toggleStopping)
+    {
+        if (toggleStopping)
+        {
+            currentTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
+            StopCoroutine(IncreaseGameSpeedOverTime());
+        }
+        else
+        {
+            Time.timeScale = currentTimeScale;
+            StartCoroutine(IncreaseGameSpeedOverTime());
+        }
+    }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
@@ -32,7 +59,7 @@ public class PlayerScript : MonoBehaviour
         }
         if(isAlive)
         {
-            score = Time.time * 4;
+            score = (Time.time - initialTimeTime) * 4;
             ScoreText.text = "Score : " + (int)score;
         }
     }
