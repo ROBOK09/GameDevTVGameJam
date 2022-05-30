@@ -59,9 +59,9 @@ public class PlayerScript : MonoBehaviour
         {
             if(isGrounded == true)
             {
+                isGrounded = false;
                 AudioSource.PlayClipAtPoint(jumpSFX, Vector3.zero);
                 RB.AddForce(Vector2.up * JumpForce);
-                isGrounded = false;
             }
         }
         if(isAlive)
