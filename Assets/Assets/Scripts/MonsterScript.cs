@@ -3,7 +3,6 @@
 public class MonsterScript : MonoBehaviour
 {
     public MonsterGenerator monsterGenerator;
-
     void Update()
     {
         transform.Translate(Vector2.left * monsterGenerator.currentSpeed * Time.deltaTime);

@@ -6,7 +6,6 @@ public class PlayerScript : MonoBehaviour
 {
     public float JumpForce;
     float score;
-    [SerializeField]
     bool isGrounded = false;
     bool isAlive = true;
     Rigidbody2D RB;
@@ -39,6 +38,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (toggleStopping)
         {
+            currentTimeScale = Time.timeScale;
             Time.timeScale = 0f;
             StopCoroutine(IncreaseGameSpeedOverTime());
         }
@@ -51,8 +51,6 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        currentTimeScale = Time.timeScale;
-        Debug.Log(currentTimeScale);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if(isGrounded == true)
