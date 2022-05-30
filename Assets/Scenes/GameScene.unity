@@ -1573,7 +1573,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME OVER
+  m_text: OOPS !! CAUGHT !!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13d4fd4a184f8d640beeef18a40d5a39, type: 2}
   m_sharedMaterial: {fileID: 7851728162614489626, guid: 13d4fd4a184f8d640beeef18a40d5a39,
@@ -1601,8 +1601,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 230
-  m_fontSizeBase: 230
+  m_fontSize: 160
+  m_fontSizeBase: 160
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
