@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class MenuScript : MonoBehaviour
 {
+    [SerializeField] AudioMixer audioMixer;
+
     public static bool GameisPaused = false;
     public GameObject pauseMenuUI;
 
@@ -35,6 +38,11 @@ public class MenuScript : MonoBehaviour
         pauseMenuUI.SetActive(true);
         player.StopOrResumeTime(true);
         GameisPaused = true;
+    }
+
+    public void SetVolume(float volume)
+    {
+        audioMixer.SetFloat("Volume", volume);
     }
 
     public void ReplayLevel()
