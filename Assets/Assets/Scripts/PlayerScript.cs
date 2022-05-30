@@ -28,15 +28,17 @@ public class PlayerScript : MonoBehaviour
 
     private IEnumerator IncreaseGameSpeedOverTime()
     {
-        Time.timeScale = gameSpeedIncreaseMultiplier;
-        yield return new WaitForSeconds(timeToIncreaseGameSpeed);
+        while (true)
+        {
+            Time.timeScale += gameSpeedIncreaseMultiplier;
+            yield return new WaitForSeconds(timeToIncreaseGameSpeed);
+        }
     }
 
     public void StopOrResumeTime(bool toggleStopping)
     {
         if (toggleStopping)
         {
-            currentTimeScale = Time.timeScale;
             Time.timeScale = 0f;
             StopCoroutine(IncreaseGameSpeedOverTime());
         }
@@ -49,7 +51,9 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        currentTimeScale = Time.timeScale;
+        Debug.Log(currentTimeScale);
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if(isGrounded == true)
             {
