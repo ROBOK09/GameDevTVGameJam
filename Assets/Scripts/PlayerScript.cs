@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] float gameSpeedIncreaseMultiplier = 1f;
     [SerializeField] AudioClip jumpSFX;
     [SerializeField] AudioClip deathSFX;
+    [SerializeField] AudioSource backgroundSFX;
 
     public float JumpForce;
     public TMP_Text ScoreText;
@@ -60,7 +61,7 @@ public class PlayerScript : MonoBehaviour
             if(isGrounded == true)
             {
                 isGrounded = false;
-                AudioSource.PlayClipAtPoint(jumpSFX, Vector3.zero);
+                backgroundSFX.PlayOneShot(jumpSFX);
                 RB.AddForce(Vector2.up * JumpForce);
             }
         }
@@ -83,7 +84,8 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Monster"))
         {
             isAlive = false;
-            AudioSource.PlayClipAtPoint(deathSFX, Vector3.zero);
+            backgroundSFX.clip = null;
+            backgroundSFX.PlayOneShot(deathSFX);
             Time.timeScale = 0;
             gameOverPanel.SetActive(true);
         }
