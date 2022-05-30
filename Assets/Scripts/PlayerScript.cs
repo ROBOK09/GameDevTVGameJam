@@ -67,7 +67,7 @@ public class PlayerScript : MonoBehaviour
         if(isAlive)
         {
             score = (Time.time - initialTime) * 4;
-            ScoreText.text = "Score : " + (int)score;
+            ScoreText.text = "Score - " + (int)score;
         }
     }
 
