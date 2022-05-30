@@ -11,7 +11,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] AudioSource backgroundSFX;
 
     public float JumpForce;
-    public TMP_Text ScoreText;
+    public TMP_Text[] ScoreText;
     public GameObject gameOverPanel;
 
     private float currentTimeScale = 1f;
@@ -68,7 +68,10 @@ public class PlayerScript : MonoBehaviour
         if(isAlive)
         {
             score = (Time.time - initialTime) * 4;
-            ScoreText.text = "Score - " + (int)score;
+            foreach (TMP_Text scoreText in ScoreText)
+            {
+                scoreText.text = "Score - " + (int)score;
+            }
         }
     }
 
@@ -86,6 +89,7 @@ public class PlayerScript : MonoBehaviour
             isAlive = false;
             backgroundSFX.clip = null;
             backgroundSFX.PlayOneShot(deathSFX);
+            Destroy(ScoreText[0].gameObject);
             Time.timeScale = 0;
             gameOverPanel.SetActive(true);
         }
